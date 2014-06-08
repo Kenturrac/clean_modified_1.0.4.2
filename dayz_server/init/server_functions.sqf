@@ -936,3 +936,4 @@ server_setLocalObjVars = {
 };
 
 call compile preProcessFileLineNumbers "z\addons\dayz_server\custommap\willowLake_castle.sqf";
+call compile preProcessFileLineNumbers "z\addons\dayz_server\custommap\novy_trader.sqf";
