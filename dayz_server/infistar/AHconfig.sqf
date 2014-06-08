@@ -2,17 +2,17 @@
 /* *******************Developer : infiSTAR (infiSTAR23@gmail.com)******************* */
 /* ******************Copyright © 2014 infiSTAR all rights reserved****************** */
 /* *********************************www.infiSTAR.de********************************* */
-/*  Key to open the menu  */ _OpenMenuKey = 0x3C;    /* google DIK_KeyCodes (0x3C is F2) */
+/*  Key to open the menu  */ _OpenMenuKey = 0x0A;    /* google DIK_KeyCodes (0x3C is F2) */
 /*  LOW ADMIN HERE        */ _LowLevel_List =   ["0","0","0"]; //do not have a , at the end.
 /*  NORMAL ADMIN HERE     */ _NormalLevel_List =["0","0","0"]; //do not have a , at the end.
 /*  SUPER ADMIN HERE      */ _SuperLevel_List = ["0","0","0"]; //do not have a , at the end.
 /*  BANNED PLAYER HERE    */ _BLOCKED =         ["0","0","0"]; //do not have a , at the end.
 /* ********************************************************************************* */
 /*  Top esc menu TXT      */ _TopOfESC = "DayZ Server"; //do not use " in this text.
-/*  Bottom esc menu TXT   */ _LowerTop = "AntiHack / AdminTool"; //do not use " in this text.
-/*  Bottom esc menu TXT2  */ _LowerBottom = "by infiSTAR.de"; //do not use " in this text.
+/*  Bottom esc menu TXT   */ _LowerTop = "Web: www.kentutainment.de"; //do not use " in this text.
+/*  Bottom esc menu TXT2  */ _LowerBottom = "TS: 146.0.32.47 <br />PW: epoch"; //do not use " in this text.
 /*  Color esc menu TXT    */ _EscColor = [0.6,0,0,1];
-/*  DebugMonitor TXT      */ _BottomDebug = "infiSTAR.de"; //do not use " in this text.
+/*  DebugMonitor TXT      */ _BottomDebug = "Kentutainment"; //do not use " in this text.
 /*  DebugMonitor Key      */ _ODK =  0xCF;	/* google DIK_KeyCodes (0xCF is END) */
 /*  Use DebugMonitor      */ _DMS =  true;	/* true or false */	/* starts up with debugmonitor ON if true */
 /*  DebugMonitor Action   */ _DMW = false;	/* true or false */	/* "Debug" option on mousewheel */
@@ -23,7 +23,7 @@
 /*  Forbid VON Sidechat   */ _VON =  true;   /* true or false */	/* recommended:  true */	/* talking on sidechat will put out a warning and kick if continue */
 
 /*  Break Functions ?     */  BHF =  true;   /* true or false */	/* recommended:  true */	/* break some known functions used by hacks! */
-/*  Use vehicle check?    */ _UVC = false;	/* true or false */	/* recommended: false */	/* using _ALLOWED_Vehicles and _FORBIDDEN_Vehicles lists */
+/*  Use vehicle check?    */ _UVC =  true;	/* true or false */	/* recommended: false */	/* using _ALLOWED_Vehicles and _FORBIDDEN_Vehicles lists */
 /*  Vehicle WHITELIST     */ _UVW = false;   /* true or false */	/* recommended: false */	/* if false - _ALLOWED_Vehicles won't not be used */
 
 /*  Use FileScan ?        */ _UFS =  true;   /* true or false */	/* recommended:  true */	/* spams the rpt but often finds hackers */
@@ -34,9 +34,9 @@
 /*  HACKED BOX Check ?    */ _CHB =  true;	/* true or false */	/* recommended:  true */	/* some epoch player might want to turn this one off */
 /*  Max Cargo Count ?     */ _MCC =  650;
 
-/*  Check CMDMenus ?      */ _CCM = false;   /* true or false */	/* recommended:  true */	/* only disable this if you know what you are doing. */
-/*  BLOCK ALL CMDMenus    */ _BCM = false;   /* true or false */	/* recommended:  true */	/* we don't need commandingMenus. so have this true. */
-/*  Check Actions ?       */ _CSA = false;   /* true or false */	/* recommended:  true */	/* if you have custom mousewheel actions you can simply disable this */
+/*  Check CMDMenus ?      */ _CCM =  true;   /* true or false */	/* recommended:  true */	/* only disable this if you know what you are doing. */
+/*  BLOCK ALL CMDMenus    */ _BCM =  true;   /* true or false */	/* recommended:  true */	/* we don't need commandingMenus. so have this true. */
+/*  Check Actions ?       */ _CSA =  true;   /* true or false */	/* recommended:  true */	/* if you have custom mousewheel actions you can simply disable this */
 /* ********************************************************************************* */
 /*  Player that have one of the items in _ForbiddenWeapons in their inventory will get punished!  */
 /*  FORBIDDEN Weapons     */ _ForbiddenWeapons =
