@@ -87,14 +87,14 @@ if (!isDedicated) then {
 	_playerMonitor = 	[] execVM "\z\addons\dayz_code\system\player_monitor.sqf";	
 	
 	//anti Hack
-	[] execVM "\z\addons\dayz_code\system\antihack.sqf";
+	//[] execVM "\z\addons\dayz_code\system\antihack.sqf";
 
 	//Lights
 	//[false,12] execVM "\z\addons\dayz_code\compile\local_lights_init.sqf";
 	
 };
 
-#include "\z\addons\dayz_code\system\REsec.sqf"
+//#include "\z\addons\dayz_code\system\REsec.sqf"
 
 //Start Dynamic Weather
 execVM "\z\addons\dayz_code\external\DynamicWeatherEffects.sqf";
