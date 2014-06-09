@@ -148,3 +148,6 @@ class DayZ_loadingScreen
 		};
 	};
 };
+
+// Info screens
+#include "custom\info\f1_dialog.hpp"

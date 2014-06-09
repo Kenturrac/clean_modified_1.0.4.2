@@ -77,6 +77,9 @@ if (isServer) then {
 };
 
 if (!isDedicated) then {
+	// Infoscreen
+	[] execVM "custom\info\player_infoScreen.sqf";
+	
 	//Conduct map operations
 	0 fadeSound 0;
 	waitUntil {!isNil "dayz_loadScreenMsg"};
