@@ -84,6 +84,216 @@ class RscProgressNotFreeze
 	h = 0.039216;
 	texture = "#(argb,8,8,3)color(0,0,0,0)";
 };
+
+// Kentus InfoScreen
+
+class RscText_Infoscreen
+{
+	access = 0;
+	type = 0;
+	idc = -1;
+	colorBackground[] = {1,1,1,0};
+	colorText[] = {1,1,1};
+	text = "";
+	fixedWidth = 0;
+	x = 0;
+	y = 0;
+	h = 0.037;
+	w = 0.3;
+	style = 2;
+	shadow = 2;
+	font = "EtelkaNarrowMediumPro";
+	SizeEx = 0.08;
+};
+
+class RscStructuredText_Infoscreen
+{
+	access = 0;
+	type = 13;
+	idc = -1;
+	style = 0;
+	colorText[] = {0.8784,0.8471,0.651,1};
+	class Attributes
+	{
+		font = "EtelkaNarrowMediumPro";
+		color = "#e0d8a6";
+		align = "center";
+		shadow = 1;
+	};
+	x = 0;
+	y = 0;
+	h = 0.035;
+	w = 0.1;
+	text = "";
+	size = 0.03921;
+	shadow = 2;
+};
+
+class RscPicture_Infoscreen
+{
+	access = 0;
+	type = 0;
+	idc = -1;
+	style = 2096;
+	colorBackground[] = {0,0,0,0};
+	colorText[] = {1,1,1,1};
+	font = "EtelkaNarrowMediumPro";
+	sizeEx = 0;
+	lineSpacing = 0;
+	text = "";
+	fixedWidth = 0;
+	shadow = 0;
+	x = 0;
+	y = 0;
+	w = 0.2;
+	h = 0.15;
+};
+
+class RscButton_Infoscreen
+{
+	type = 16;
+	x = 0.1;
+	y = 0.1;
+
+	class HitZone 
+	{
+		left = 0.004;
+		top = 0.029;
+		right = 0.004;
+		bottom = 0.029;
+	};
+
+	class ShortcutPos 
+	{
+		left = 0.0145;
+		top = 0.026;
+		w = 0.0392157;
+		h = 0.0522876;
+	};
+
+	class TextPos 
+	{
+		left = 0.00;
+		top = 0.017;
+		right = 0.005;
+		bottom = 0.005;
+	};
+
+	shortcuts[] = {};
+	textureNoShortcut = "#(argb,8,8,3)color(0,0,0,0)";
+	color[] = {0.8784,0.8471,0.651,1};
+	color2[] = {0.95,0.95,0.95,1};
+	colorDisabled[] = {1,1,1,0.25};
+	colorBackground[] = {1,1,1,1};
+	colorBackground2[] = {1,1,1,0.4};
+
+	class Attributes 
+	{
+		font = "EtelkaNarrowMediumPro";
+		color = "#E5E5E5";
+		align = "center";
+		shadow = "true";
+	};
+
+	idc = -1;
+	style = 0;
+	default = 0;
+	shadow = 2;
+	w = 0.183825;
+	h = 0.104575;
+	periodFocus = 1.2;
+	periodOver = 0.8;
+	animTextureNormal = "\ca\ui\data\igui_button_normal_ca.paa";
+	animTextureDisabled = "\ca\ui\data\igui_button_disabled_ca.paa";
+	animTextureOver = "\ca\ui\data\igui_button_over_ca.paa";
+	animTextureFocused = "\ca\ui\data\igui_button_focus_ca.paa";
+	animTexturePressed = "\ca\ui\data\igui_button_down_ca.paa";
+	animTextureDefault = "\ca\ui\data\igui_button_normal_ca.paa";
+	animTextureNoShortcut = "\ca\ui\data\igui_button_normal_ca.paa";
+	period = 0.4;
+	font = "Zeppelin32";
+	size = 0.05;
+	sizeEx = 0.05;
+	text = "";
+	soundEnter[] = {"\ca\ui\data\sound\onover",0.09,1};
+	soundPush[] = {"\ca\ui\data\sound\new1",0,0};
+	soundClick[] = {"\ca\ui\data\sound\onclick",0.07,1};
+	soundEscape[] = {"\ca\ui\data\sound\onescape",0.09,1};
+	action = "";
+
+	class AttributesImage
+	{
+		font = "Zeppelin32";
+		color = "#E5E5E5";
+		align = "left";
+	};
+};
+
+class RscHTML_Infoscreen
+{
+	idc = -1;
+	type = 9;
+	style = 0;
+
+	text="";
+
+	colorBackground[] = {1,1,1,0};
+	colorBold[] = {1, 0, 0, 1};
+	colorLink[] = {0, 0, 1, 1};
+	colorLinkActive[] = {1, 0, 0, 1};
+	colorPicture[] = {1, 1, 1, 1};
+	colorPictureBorder[] = {1, 0, 0, 1};
+	colorPictureLink[] = {0, 0, 1, 1};
+	colorPictureSelected[] = {0, 1, 0, 1};
+	colorText[] = {1, 1, 1, 1};
+
+	prevPage = "\ca\ui\data\arrow_left_ca.paa";
+	nextPage = "\ca\ui\data\arrow_right_ca.paa";
+
+	class H1 { 
+		font = "Zeppelin32"; 
+		fontBold = "Zeppelin33"; 
+		sizeEx = 0.0286458; 
+	};
+
+	class H2 { 
+		font = "Zeppelin32"; 
+		fontBold = "Zeppelin33"; 
+		sizeEx = 0.0286458; 
+	};
+
+	class H3 { 
+		font = "Zeppelin32"; 
+		fontBold = "Zeppelin33"; 
+		sizeEx = 0.0286458; 
+	};
+
+	class H4 { 
+		font = "Zeppelin33Italic"; 
+		fontBold = "Zeppelin33"; 
+		sizeEx = 0.0208333; 
+	};
+
+	class H5 { 
+		font = "Zeppelin32"; 
+		fontBold = "Zeppelin33"; 
+		sizeEx = 0.0208333; 
+	};
+
+	class H6 { 
+		font = "Zeppelin32"; 
+		fontBold = "Zeppelin33"; 
+		sizeEx = 0.0208333; 
+	};
+
+	class P { 
+		font = "EtelkaNarrowMediumPro"; 
+		fontBold = "EtelkaNarrowMediumPro"; 
+		sizeEx = 0.055; 
+	}; 
+};
+
+
 //
 // the loading screen itself
 //

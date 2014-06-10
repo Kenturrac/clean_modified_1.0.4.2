@@ -78,7 +78,7 @@ if (isServer) then {
 
 if (!isDedicated) then {
 	// Infoscreen
-	[] execVM "custom\info\player_infoScreen.sqf";
+	[] execVM "custom\InfoScreen\player_infoScreen.sqf";
 	
 	//Conduct map operations
 	0 fadeSound 0;

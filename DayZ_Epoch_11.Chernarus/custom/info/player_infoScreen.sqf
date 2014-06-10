@@ -7,6 +7,7 @@
 
 	waituntil {!isnull (finddisplay 46)};
 	(finddisplay 46) displayaddeventhandler ["keydown","_this call infoScreen_buttons; false;"];
+	diag_log ["Kenturracs Server Info Screen enabled."];
 };
 
 infoScreen_buttons = {
