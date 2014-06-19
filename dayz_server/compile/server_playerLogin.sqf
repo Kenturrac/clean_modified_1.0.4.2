@@ -1,4 +1,4 @@
-private ["_isInfected","_doLoop","_hiveVer","_isHiveOk","_playerID","_playerObj","_primary","_key","_charID","_playerName","_backpack","_isNew","_inventory","_survival","_model","_mags","_wpns","_bcpk","_config","_newPlayer"];
+private ["_isInfected","_doLoop","_hiveVer","_isHiveOk","_playerID","_playerObj","_primary","_primary2","_humanity","_key","_charID","_playerName","_backpack","_isNew","_inventory","_survival","_model","_mags","_wpns","_bcpk","_config","_newPlayer"];
 
 #ifdef DZE_SERVER_DEBUG
 diag_log ("STARTING LOGIN: " + str(_this));
@@ -26,6 +26,7 @@ _backpack = 	[];
 _survival =		[0,0,0];
 _isInfected =   0;
 _model =		"";
+_humanity = 	2500;
 
 if (_playerID == "") then {
 	_playerID = getPlayerUID _playerObj;
@@ -74,6 +75,20 @@ _charID = 		_primary select 2;
 #ifdef DZE_SERVER_DEBUG
 diag_log ("LOGIN RESULT: " + str(_primary));
 #endif
+
+//Do Connection Attempt	-	Had to put that database request in to get the humanity of the player 	/Kenturrac
+_doLoop = 0;
+while {_doLoop < 5} do {
+	_key = format["CHILD:102:%1:",_charID];
+	_primary2 = _key call server_hiveReadWrite;
+	if (count _primary2 > 0) then {
+		if ((_primary2 select 0) != "ERROR") then {
+			_doLoop = 9;
+		};
+	};
+	_doLoop = _doLoop + 1;
+};
+_humanity = _primary2 select 5;
 
 /* PROCESS */
 _hiveVer = 0;
@@ -146,5 +161,7 @@ if (worldName == "chernarus") then {
 	([4654,9595,0] nearestObject 145260) setDamage 1;
 };
 
-dayzPlayerLogin = [_charID,_inventory,_backpack,_survival,_isNew,dayz_versionNo,_model,_isHiveOk,_newPlayer,_isInfected];
+dayzPlayerLogin = [_charID,_inventory,_backpack,_survival,_isNew,dayz_versionNo,_model,_isHiveOk,_newPlayer,_isInfected,_humanity];
 (owner _playerObj) publicVariableClient "dayzPlayerLogin";
+
+diag_log format ["_humanity: %1, dayzPlayerLogin: %2", _humanity, dayzPlayerLogin];

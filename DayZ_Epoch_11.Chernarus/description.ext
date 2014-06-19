@@ -85,9 +85,9 @@ class RscProgressNotFreeze
 	texture = "#(argb,8,8,3)color(0,0,0,0)";
 };
 
-// Kentus InfoScreen
+// Kentus Custom Dialogs
 
-class RscText_Infoscreen
+class RscText_Custom_01
 {
 	access = 0;
 	type = 0;
@@ -106,7 +106,7 @@ class RscText_Infoscreen
 	SizeEx = 0.08;
 };
 
-class RscStructuredText_Infoscreen
+class RscStructuredText_Custom_01
 {
 	access = 0;
 	type = 13;
@@ -129,7 +129,7 @@ class RscStructuredText_Infoscreen
 	shadow = 2;
 };
 
-class RscPicture_Infoscreen
+class RscPicture_Custom_01
 {
 	access = 0;
 	type = 0;
@@ -149,7 +149,7 @@ class RscPicture_Infoscreen
 	h = 0.15;
 };
 
-class RscButton_Infoscreen
+class RscButton_Custom_01
 {
 	type = 16;
 	x = 0.1;
@@ -229,7 +229,7 @@ class RscButton_Infoscreen
 	};
 };
 
-class RscHTML_Infoscreen
+class RscHTML_Custom_01
 {
 	idc = -1;
 	type = 9;
@@ -297,6 +297,7 @@ class RscHTML_Infoscreen
 //
 // the loading screen itself
 //
+
 class DayZ_loadingScreen
 { 
 	idd = -1;
@@ -360,4 +361,7 @@ class DayZ_loadingScreen
 };
 
 // Info screens
-#include "custom\info\f1_dialog.hpp"
+#include "custom\InfoScreen\f1_dialog.hpp"
+
+// Newbie spawn selection
+#include "custom\NewbieSpawnSelection\spawnSelectionScreen.hpp"

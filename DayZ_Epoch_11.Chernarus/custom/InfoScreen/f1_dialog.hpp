@@ -3,7 +3,7 @@ class f1_DialogScreen
 	idd = -1; 
 	class controls
 	{ 
-		class Background: RscPicture_Infoscreen
+		class Background: RscPicture_Custom_01
 		{
 			idc = -1; 
 			style = 2096; 
@@ -21,7 +21,7 @@ class f1_DialogScreen
 			colorText[] = {1,1,1,1}; 
 		};
 
-		class Title: RscText_Infoscreen
+		class Title: RscText_Custom_01
 		{
 			idc = -1; 
 			style = 2; 
@@ -39,7 +39,7 @@ class f1_DialogScreen
 			colorText[] = {1,1,1,1}; 
 		};
 
-		class ServerLinks: RscStructuredText_Infoscreen
+		class ServerLinks: RscStructuredText_Custom_01
 		{
 			idc = -1;
 			style = 2;
@@ -55,7 +55,7 @@ class f1_DialogScreen
 			size = 0.05;
 		};
 
-		class CloseButton: RscButton_Infoscreen
+		class CloseButton: RscButton_Custom_01
 		{
 			idc = -1;
 
@@ -69,7 +69,7 @@ class f1_DialogScreen
 			h = 0.07 * (0.74 * safezoneH);
 		};
 
-		class SeverInfoTextfield: RscHTML_Infoscreen
+		class SeverInfoTextfield: RscHTML_Custom_01
 		{
 			idc = -1;
 			type = 9;

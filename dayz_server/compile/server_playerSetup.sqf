@@ -1,13 +1,20 @@
-private ["_characterID","_playerObj","_playerID","_dummy","_worldspace","_state","_doLoop","_key","_primary","_medical","_stats","_humanity","_lastinstance","_friendlies","_randomSpot","_position","_debug","_distance","_hit","_fractures","_score","_findSpot","_pos","_isIsland","_w","_clientID","_spawnMC","_namespace"];
+private ["_characterID","_playerObj","_playerUID","_spawnSelection","_playerID","_dummy","_worldspace","_state","_doLoop","_key","_primary","_medical","_stats","_humanity","_lastinstance","_friendlies","_randomSpot","_position","_debug","_distance","_hit","_fractures","_score","_pos","_isIsland","_w","_clientID","_spawnMC","_namespace"];
 
 //diag_log ("SETUP: attempted with " + str(_this));
 
 _characterID = _this select 0;
 _playerObj = _this select 1;
+_playerUID = _this select 2;
+_spawnSelection = _this select 3;
+
 _playerID = getPlayerUID _playerObj;
 
 if (isNull _playerObj) exitWith {
 	diag_log ("SETUP INIT FAILED: Exiting, player object null: " + str(_playerObj));
+};
+
+if (isNil "_spawnSelection") then {
+	_spawnSelection = 0; // set it to random spawn, just in case
 };
 
 //Add MPHit event handler
@@ -172,52 +179,80 @@ if (count _stats > 0) then {
 	_playerObj setVariable["headShots_CHK",0];
 };
 
+// Spawn system modified by Kenturrac
+
 if (_randomSpot) then {
-	private["_counter","_position","_isNear","_isZero","_mkr"];
+	private["_counter","_position","_noOthersNear","_positionIsZero","_mkr","_SpawnLocations_Index","_SpawnLocations_Item","_spawnPosition","_spawnInnerRadius","_spawnOuterRadius","_searchSpotToSpawnPlayer","_ok"];
+	
 	if (!isDedicated) then {
 		endLoadingScreen;
 	};
 	
-	//Spawn modify via mission init.sqf
-	if(isnil "spawnArea") then {
-		spawnArea = 1500;
-	};
 	if(isnil "spawnShoremode") then {
-		spawnShoremode = 1;
+		spawnShoremode = 0;
 	};
-	
-	// 
-	_spawnMC = actualSpawnMarkerCount;
-
-	//spawn into random
-	_findSpot = true;
-	_mkr = "";
-	while {_findSpot} do {
-		_counter = 0;
-		while {_counter < 20 and _findSpot} do {
-			// switched to floor
-			_mkr = "spawn" + str(floor(random _spawnMC));
-			_position = ([(getMarkerPos _mkr),0,spawnArea,10,0,2000,spawnShoremode] call BIS_fnc_findSafePos);
-			_isNear = count (_position nearEntities ["Man",100]) == 0;
-			_isZero = ((_position select 0) == 0) and ((_position select 1) == 0);
-			//Island Check		//TeeChange
-			_pos 		= _position;
-			_isIsland	= false;		//Can be set to true during the Check
-			for [{_w=0},{_w<=150},{_w=_w+2}] do {
-				_pos = [(_pos select 0),((_pos select 1) + _w),(_pos select 2)];
-				if(surfaceisWater _pos) exitWith {
-					_isIsland = true;
-				};
-			};
-			
-			if ((_isNear and !_isZero) || _isIsland) then {_findSpot = false};
-			_counter = _counter + 1;
+		
+	// spawn player
+	_searchSpotToSpawnPlayer = true;
+	_counter = 0;
+	while {_counter < 20 and _searchSpotToSpawnPlayer} do {
+		
+		// find random spawnpoint, if _spawnSelection is 0
+		if (_spawnSelection == 0) then {
+			_SpawnLocations_Index = floor(random (count spawnLocations));
+			_SpawnLocations_Item = spawnLocations select _spawnLocations_Index;
+			diag_log format ["Spawn player randomly."];
 		};
+
+		// find spawnpoint in newbie area, if _spawnSelection is 1
+		if (_spawnSelection == 1) then {
+			_SpawnLocations_Index = floor(random (count spawnLocations_NewbieArea));
+			_SpawnLocations_Item = spawnLocations_NewbieArea select _SpawnLocations_Index;
+			diag_log format ["Spawn player in Newbie area."];
+		};
+
+		_spawnPosition = _SpawnLocations_Item select 0;
+		_spawnInnerRadius = _SpawnLocations_Item select 1;
+		_spawnOuterRadius = _SpawnLocations_Item select 2;
+
+		// debug messages
+		diag_log ("DEBUG-Spawning: _spawnLocations_Index: " + str(_SpawnLocations_Index));
+		diag_log ("DEBUG-Spawning: _spawnLocations_Item: " + str(_SpawnLocations_Item));
+		diag_log ("DEBUG-Spawning: _spawnPosition: " + str(_spawnPosition));
+		diag_log ("DEBUG-Spawning: _spawnInnerRadius: " + str(_spawnInnerRadius));
+		diag_log ("DEBUG-Spawning: _spawnOuterRadius: " + str(_spawnOuterRadius));
+
+		_position = ([(_spawnPosition),(_spawnInnerRadius),(_spawnOuterRadius),10,0,2000,spawnShoremode] call BIS_fnc_findSafePos);
+		diag_log ("DEBUG-Spawning: _position: " + str(_position));
+
+		_noOthersNear = count (_position nearEntities ["Man",300]) == 0;
+		_positionIsZero = ((_position select 0) == 0) and ((_position select 1) == 0);
+		
+		// check if spawnspot is on a small island - Otmel check
+		_pos 		= _position;
+		_isIsland	= false;
+		for [{_w=0},{_w<=150},{_w=_w+2}] do {
+			_pos = [(_pos select 0),((_pos select 1) + _w),(_pos select 2)];
+			if(surfaceisWater _pos) exitWith {
+				_isIsland = true;
+			};
+		};
+		
+		// stop while-loop, if you found a good spawn location 
+		if ((_noOthersNear and !_positionIsZero) and !_isIsland) then {
+			_searchSpotToSpawnPlayer = false;
+			diag_log ("DEBUG-Spawning: Found a spawn location.");
+		} else {
+			diag_log ("DEBUG-Spawning: Haven't found a spawn location yet. _noOthersNear: " +str(_noOthersNear) + "/ _positionIsZero: " +str(_positionIsZero) + "/ _isIsland: " +str(_isIsland));
+		};
+		_counter = _counter + 1;
 	};
-	_isZero = ((_position select 0) == 0) and ((_position select 1) == 0);
-	_position = [_position select 0,_position select 1,0];
-	if (!_isZero) then {
-		//_playerObj setPosATL _position;
+
+	_positionIsZero = ((_position select 0) == 0) and ((_position select 1) == 0); 	//??
+	_position = [_position select 0,_position select 1,0];						//??
+	if (!_positionIsZero) then {
+		diag_log ("DEBUG-Spawning: Position is not zero.");
+		// _playerObj setPosATL _position;
 		_worldspace = [0,_position];
 	};
 };
@@ -233,7 +268,7 @@ _playerObj setVariable["humanity_CHK",_humanity];
 //_playerObj setVariable["state",_state,true];
 _playerObj setVariable["lastPos",getPosATL _playerObj];
 
-dayzPlayerLogin2 = [_worldspace,_state];
+dayzPlayerLogin2 = [_worldspace,_state,_randomSpot];
 
 // PVDZE_obj_Debris = DZE_LocalRoadBlocks;
 _clientID = owner _playerObj;
